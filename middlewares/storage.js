@@ -1,10 +1,8 @@
-//const trip = require('../services/trip');
+const initiative = require('../services/initiative');
 
 module.exports = () => (req, res, next) => {
-    //TODO import and decorate services
     req.storage = {
-        //...trip
+        ...initiative
     };
-
     next();
 }

@@ -217,6 +217,14 @@ input.form-control-2, textarea.form-control, input.form-control, textarea:disabl
   outline: none;
 }
 
+select.form-control-2, textarea.form-control, select.form-control, textarea:disabled {
+  box-shadow: 0px -2px 10px -1px #2cdce9, inset -14px -14px 30px -13px rgb(0 0 0 / 55%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  outline: none;
+}
+
 textarea:disabled {
   width: 100%;
   resize: none;

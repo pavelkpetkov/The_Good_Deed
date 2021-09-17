@@ -8,8 +8,12 @@
                     <label for="image"> <i class="fas fa-map-marker-alt"></i> Title </label>
                 </div>
                 <div class="form-group offer-input margin: auto">
-                    <input type="text" class="form-control-2" id="category" placeholder="..." name="category"
-                        value="{{initData.category}}">
+                    <select class="form-control-2" id="category" name="category">
+                        <option style="display:none"></option>
+                        <option value="Environment">Environment</option>
+                        <option value="Society">Society</option>
+                        <option value="Be Inspired">Be inspired</option>
+                    </select>
                     <input type="text" class="form-control-2" id="title" placeholder="..." name="title"
                         value="{{initData.title}}">
                 </div>

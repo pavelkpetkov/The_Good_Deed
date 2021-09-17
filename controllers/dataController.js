@@ -6,19 +6,19 @@ router.get('/', (req, res) => {
     res.render('home/categories');
 })
 
-router.get('/environment', (req, res) => {
-    //TO DO
-    res.send('Hi');
+router.get('/environment', async (req, res) => {
+    const allEnvoronment = await req.storage.getAllEnvironmentInits();
+    res.render('initiative/allEnvironment', { allEnvoronment });
 })
 
-router.get('/society', (req, res) => {
-    //TO DO
-    res.send('Hi');
+router.get('/society', async (req, res) => {
+    const allSociety = await req.storage.getAllSocietyInits();
+    res.render('initiative/allSociety', { allSociety });
 })
 
-router.get('/beinspired', (req, res) => {
-    //TO DO
-    res.send('Hi');
+router.get('/beinspired', async (req, res) => {
+    const allBeInspired = await req.storage.getAllBeInspiredInits();
+    res.render('initiative/allBeInspired', { allBeInspired });
 })
 
 router.get('/create', isUser(), (req, res) => {
@@ -40,7 +40,13 @@ router.post('/create', isUser(), async (req, res) => {
     try {
         await req.storage.createInit(initData);
         // TODO: redirect to correct category:
-        res.redirect('/');
+        if (initData.category == 'Environment') {
+            res.redirect('/environment');
+        } else if (initData.category == 'Society') {
+            res.redirect('/society');
+        } else {
+            res.redirect('/beinspired');
+        }
     } catch (err) {
         console.log(err.message);
         const ctx = {

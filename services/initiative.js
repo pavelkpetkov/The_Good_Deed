@@ -12,6 +12,21 @@ async function getAllInits() {
     return initiatives;
 }
 
+async function getAllEnvironmentInits() {
+    const initiatives = await Initiative.find({ category: 'Environment'}).lean();
+    return initiatives;
+}
+
+async function getAllSocietyInits() {
+    const initiatives = await Initiative.find({ category: 'Society' }).lean();
+    return initiatives;
+}
+
+async function getAllBeInspiredInits() {
+    const initiatives = await Initiative.find({ category: 'Be inspired' }).lean();
+    return initiatives;
+}
+
 async function getInitById(id) {
     const initiative = await Initiative.findById(id).lean();
     return initiative;
@@ -50,5 +65,8 @@ module.exports = {
     getInitById,
     joinInit,
     deleteInit,
-    editInit
+    editInit,
+    getAllEnvironmentInits,
+    getAllSocietyInits,
+    getAllBeInspiredInits
 }

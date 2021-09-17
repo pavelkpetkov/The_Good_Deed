@@ -5,13 +5,13 @@
         <p class="lead">Join or create your own initative!</p>
     </header>
     <div class="row text-center">
-        <!-- If there are shared trips in the database display each of them -->
+        <!-- If there are initiatives in the database display each of them -->
         {{#each allEnvironment}}
         <!-- This is the name of the passed context !!! -->
         {{> init}}
         <!-- This is the name of the partial !!! -->
         {{else}}
-        <!-- If there are no shared trips in the database -->
+        <!-- If there are no initiativess in the database -->
         <div class="no-trips">
             <p class="lead">No initiatives in this category.</p>
         </div>

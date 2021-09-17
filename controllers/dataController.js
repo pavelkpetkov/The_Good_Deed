@@ -7,8 +7,8 @@ router.get('/', (req, res) => {
 })
 
 router.get('/environment', async (req, res) => {
-    const allEnvoronment = await req.storage.getAllEnvironmentInits();
-    res.render('initiative/allEnvironment', { allEnvoronment });
+    const allEnvironment = await req.storage.getAllEnvironmentInits();
+    res.render('initiative/allEnvironment', { allEnvironment });
 })
 
 router.get('/society', async (req, res) => {
@@ -41,11 +41,11 @@ router.post('/create', isUser(), async (req, res) => {
         await req.storage.createInit(initData);
         // TODO: redirect to correct category:
         if (initData.category == 'Environment') {
-            res.redirect('/environment');
+            res.redirect('/data/environment');
         } else if (initData.category == 'Society') {
-            res.redirect('/society');
+            res.redirect('/data/society');
         } else {
-            res.redirect('/beinspired');
+            res.redirect('/data/beinspired');
         }
     } catch (err) {
         console.log(err.message);

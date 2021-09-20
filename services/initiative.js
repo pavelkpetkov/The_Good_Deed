@@ -23,7 +23,7 @@ async function getAllSocietyInits() {
 }
 
 async function getAllBeInspiredInits() {
-    const initiatives = await Initiative.find({ category: 'Be inspired' }).lean();
+    const initiatives = await Initiative.find({ category: 'Be Inspired' }).lean();
     return initiatives;
 }
 

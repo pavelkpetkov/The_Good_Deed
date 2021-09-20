@@ -88,8 +88,8 @@ router.get('/details/:id', isUser(), async (req, res) => {
             }
 
             const creator = await getUserById(initiative.author);
-            console.log(initiative);
             initiative.authorName = creator.name;
+            console.log(initiative);
         }
 
         res.render('initiative/details', { initiative });
@@ -97,6 +97,55 @@ router.get('/details/:id', isUser(), async (req, res) => {
         console.log(err.message);
         res.redirect('/');
     }
+});
+
+router.get('/delete/:id', isUser(), async (req, res) => {
+    try {
+        const init = await req.storage.getInitById(req.params.id);
+        if (init.author != req.user._id) {
+            throw new Error('Cannot delete initiative you haven\'t created');
+        }
+
+        await req.storage.deleteInit(req.params.id);
+
+        res.redirect('/data');
+    } catch (err) {
+        console.log(err.message);
+        res.redirect('/');
+    }
+});
+
+router.get('/edit/:id', isUser(), async (req, res) => {
+    try {
+        const init = await req.storage.getInitById(req.params.id);
+
+        if (init.author != req.user._id) {
+            throw new Error('Cannot edit initiative you haven\'t created');
+        }
+
+        res.render('initiative/edit', { init });
+    } catch (err) {
+        console.log(err.message);
+        res.redirect('/data/details/' + req.params.id);
+    }
 })
+
+router.post('/edit/:id', isUser(), async (req, res) => {
+    try {
+        const init = await req.storage.getInitById(req.params.id);
+
+        if (init.author != req.user._id) {
+            throw new Error('Cannot edit initiative you haven\'t created');
+        }
+
+        await req.storage.editInit(req.params.id, req.body);
+
+        res.redirect('/data/details/' + req.params.id);
+    } catch (err) {
+        console.log(err.message);
+        res.redirect('/data/details/' + req.params.id);
+    }
+})
+
 
 module.exports = router;

@@ -1,20 +1,20 @@
-<section id="create-initiative">
-    <div class="container offer-trip">
-        <h1>Create your initiative</h1>
+<section class="py-5" id="edit-trip-page">
+    <div class="container edit">
+        <h1>Edit your initiative</h1>
         <div>
-            <form action="/data/create" method="POST">
+            <form action="/data/edit/{{init._id}}" method="POST">
                 <div class="offer-label">
                     <label for="category"> <i class="fas fa-map-marker-alt"></i> Category </label>
                     <label for="image"> <i class="fas fa-map-marker-alt"></i> Title </label>
                 </div>
                 <div class="form-group offer-input margin: auto">
                     <select class="form-control-2" id="category" name="category">
-                        <option style="display:none"></option>
-                        <option value="Environment">Environment</option>
+                        <option value="Environment" >Environment</option>
                         <option value="Society">Society</option>
+                        <option value="Be Inspired">Be inspired</option>
                     </select>
                     <input type="text" class="form-control-2" id="title" placeholder="..." name="title"
-                        value="{{initData.title}}">
+                        value="{{init.title}}">
                 </div>
                 <div class="offer-label">
                     <label for="location"> <i class="fas fa-map-marker-alt"></i> Location </label>
@@ -22,9 +22,9 @@
                 </div>
                 <div class="form-group offer-input">
                     <input type="text" class="form-control-2" id="location" placeholder="..." name="location"
-                        value="{{initData.location}}">
+                        value="{{init.location}}">
                     <input type="text" class="form-control-2" id="image" placeholder="https://..." name="image"
-                        value="{{initData.image}}">
+                        value="{{init.image}}">
                 </div>
                 <div class="offer-label">
                     <label for="date"> <i class="far fa-calendar-alt"></i> Date</label>
@@ -32,14 +32,14 @@
                 </div>
                 <div class="form-group offer-input">
                     <input type="date" class="form-control-2" id="date" placeholder="18 May 2021" name="date"
-                        value="{{initData.date}}">
+                        value="{{init.date}}">
                     <input type="time" class="form-control-2" id="time" placeholder="19:00 PM" name="time"
-                        value="{{initData.time}}">
+                        value="{{init.time}}">
                 </div>
                 <div class="form-group">
                     <label for="description">Description</label>
                     <textarea class="form-control" id="description" placeholder="Information about your initiative"
-                        name="description"></textarea>
+                        name="description">{{init.description}}</textarea>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

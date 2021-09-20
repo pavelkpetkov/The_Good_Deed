@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { isGuest, isUser } = require('../middlewares/guards');
+const { getUserById } = require('../services/user');
 
 
 router.get('/', (req, res) => {
@@ -34,7 +35,7 @@ router.post('/create', isUser(), async (req, res) => {
         date: req.body.date,
         time: req.body.time,
         description: req.body.description,
-        owner: req.user._id,
+        author: req.user._id,
     }
 
     try {
@@ -59,10 +60,42 @@ router.post('/create', isUser(), async (req, res) => {
                 date: req.body.date,
                 time: req.body.time,
                 description: req.body.description,
-                owner: req.user._id,
+                author: req.user._id,
             }
         }
         res.render('initiative/create', ctx);
+    }
+});
+
+router.get('/details/:id', isUser(), async (req, res) => {
+    try {
+        const initiative = await req.storage.getInitById(req.params.id);
+
+        initiative.hasUser = Boolean(req.user);
+        if (req.user) {
+            initiative.isOwner = req.user && req.user._id == initiative.author;
+            initiative.hasJoined = false;
+            if (initiative.joined.length > 0) {
+                let people = [];
+                for (const userId of initiative.joined) {
+                    if (userId == req.user._id) {
+                        initiative.hasJoined = true;
+                    }
+                    let user = await getUserById(userId);
+                    people.push(user.name);
+                }
+                initiative.peopleJoined = people.join(', ');
+            }
+
+            const creator = await getUserById(initiative.author);
+            console.log(initiative);
+            initiative.authorName = creator.name;
+        }
+
+        res.render('initiative/details', { initiative });
+    } catch (err) {
+        console.log(err.message);
+        res.redirect('/');
     }
 })
 

@@ -1,0 +1,61 @@
+<section class="py-5 details" id="trip-details-page">
+    <div class="container">
+        <div class="destination">
+            <div>
+                <span class="icon"><i class="fas fa-map-marked-alt"></i></span>
+                <h5><span>{{initiative.title}}</span> in <span>{{initiative.location}}</span> </h5>
+            </div>
+            <div>
+                <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                <h5> <span>{{initiative.date}}</span> at <span>{{initiative.time}}</span> </h5>
+            </div>
+        </div>
+        <p class="line"></p>
+        <div class="buddies-info">
+            <i class="fas fa-users buddies"></i>
+            <h5>People joined this initiative:</h5>
+            <div>
+                <!-- if there are joined people for the current init separate them with comma and space", " -->
+                {{#if initiative.joined}}
+                <p>{{initiative.peopleJoined}}</p>
+                {{else}}
+                <!-- If not display: -->
+                <p>there are no people joined yet...</p>
+                {{/if}}
+            </div>
+            <h5>Creator: <span>{{initiative.authorName}}</span> </h5>
+        </div>
+        <p class="line"></p>
+        <div class="trip-info">
+            <div>
+                <img class="img-fluid rounded" src="{{initiative.image}}" alt="image">
+            </div>
+            <div class="trip-desc">
+                <h5>Information about the initiative:</h5>
+                <textarea class="lead" disabled>{{initiative.description}}</textarea>
+
+                <!-- if there are no logged in user do not show div with class actions  -->
+                {{#if user}}
+                <div class="actions">
+                    <!-- Only for logged user and creator to this initiative -->
+                    {{#if initiative.isOwner}}
+                    <a href="/data/delete/{{initiative._id}}" class="btn btn-danger">Delete</a>
+                    <a href="/data/edit/{{initiative._id}}" class="btn btn-warning">Edit</a>
+                    {{else}}
+
+                    {{#unless initiative.hasJoined}}
+                    <a href="/data/join/{{initiative._id}}" class="btn btn-join">Join now!</a>
+                    <a href="/data/like/{{initiative._id}}" class="btn btn-join">Like!</a>
+
+                    {{/unless}}
+                    {{#if initiative.hasJoined}}
+                    <!-- logged in user and has already joined the initiative  -->
+                    <span class="btn btn-info">Already joined. Don't be late!</span>
+                    {{/if}}
+                    {{/if}}
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</section>

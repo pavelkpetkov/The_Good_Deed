@@ -17,9 +17,13 @@ async function getUserByEmail(email) {
     return user;
 }
 
-//TODO add functions for finding users by other properties, as specified in the project requirements
+async function getUserById(id) {
+    const user = await User.findById(id).lean();
+    return user;
+}
 
 module.exports = {
     createUser,
-    getUserByEmail
+    getUserByEmail,
+    getUserById
 }

@@ -31,7 +31,7 @@ router.post('/create', isUser(), async (req, res) => {
         category: req.body.category,
         title: req.body.title,
         location: req.body.location,
-        image: req.body.image,
+        img: req.body.img,
         date: req.body.date,
         time: req.body.time,
         description: req.body.description,
@@ -56,7 +56,7 @@ router.post('/create', isUser(), async (req, res) => {
                 category: req.body.category,
                 title: req.body.title,
                 location: req.body.location,
-                image: req.body.image,
+                img: req.body.img,
                 date: req.body.date,
                 time: req.body.time,
                 description: req.body.description,
@@ -89,10 +89,17 @@ router.get('/details/:id', isUser(), async (req, res) => {
 
             const creator = await getUserById(initiative.author);
             initiative.authorName = creator.name;
+
+            for (const userId of initiative.usersLiked) {
+                if (userId == req.user._id) {
+                    initiative.hasLiked = true;
+                }
+            }
             console.log(initiative);
         }
 
         res.render('initiative/details', { initiative });
+        console.log(initiative);
     } catch (err) {
         console.log(err.message);
         res.redirect('/');
@@ -145,7 +152,37 @@ router.post('/edit/:id', isUser(), async (req, res) => {
         console.log(err.message);
         res.redirect('/data/details/' + req.params.id);
     }
-})
+});
+
+router.get('/join/:id', isUser(), async (req, res) => {
+    try {
+        const init = await req.storage.getInitById(req.params.id);
+        if (init.author == req.user._id) {
+            throw new Error('Cannot join your own initiative!');
+        }
+
+        await req.storage.joinInit(req.params.id, req.user._id);
+        res.redirect('/data/details/' + req.params.id);
+    } catch (err) {
+        console.log(err.message);
+        res.redirect('/data/details/' + req.params.id);
+    }
+});
+
+router.get('/like/:id', isUser(), async (req, res) => {
+    try {
+        const init = await req.storage.getInitById(req.params.id);
+        if (init.author == req.user._id) {
+            throw new Error('Cannot like your own initiative!');
+        }
+
+        await req.storage.likeInit(req.params.id, req.user._id);
+        res.redirect('/data/details/' + req.params.id);
+    } catch (err) {
+        console.log(err.message);
+        res.redirect('/data/details/' + req.params.id);
+    }
+});
 
 
 module.exports = router;

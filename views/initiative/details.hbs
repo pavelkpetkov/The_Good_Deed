@@ -28,7 +28,7 @@
         <p class="line"></p>
         <div class="trip-info">
             <div>
-                <img class="img-fluid rounded" src="{{initiative.image}}" alt="image">
+                <img class="img-fluid rounded" src="{{initiative.img}}" alt="image">
             </div>
             <div class="trip-desc">
                 <h5>Information about the initiative:</h5>
@@ -45,9 +45,11 @@
 
                     {{#unless initiative.hasJoined}}
                     <a href="/data/join/{{initiative._id}}" class="btn btn-join">Join now!</a>
-                    <a href="/data/like/{{initiative._id}}" class="btn btn-join">Like!</a>
-
                     {{/unless}}
+                    {{#unless initiative.hasLiked}}
+                    <a href="/data/like/{{initiative._id}}" class="btn btn-join">Like!</a>
+                    {{/unless}}
+                    <span class="likes">{{initiative.usersLiked.length}} Likes</span>
                     {{#if initiative.hasJoined}}
                     <!-- logged in user and has already joined the initiative  -->
                     <span class="btn btn-info">Already joined. Don't be late!</span>

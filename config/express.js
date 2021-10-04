@@ -9,29 +9,16 @@ module.exports = (app) => {
 
     app.engine('hbs', hbs({
         extname: 'hbs',
-                helpers: {
-            likes: function(value, options) {
+        helpers: {
+            likes: function (value, options) {
                 if (value == 1) {
-                    return "<span class='likes'>" + options.fn( {amount: value} ) + "Like" + "</span>";
+                    return "<span class='likes'>" + options.fn({ amount: value }) + "Like" + "</span>";
                 } else {
-                    return "<span class='likes'>" +  options.fn( {amount: value} ) + "Likes" + "</span>";
+                    return "<span class='likes'>" + options.fn({ amount: value }) + "Likes" + "</span>";
                 }
             }
         }
     }));
-
-    // const hbs = exphbs.create({
-    //     helpers: {
-    //         likes: function(value) {
-    //             if (value == 1) {
-    //                 return false;
-    //             } else {
-    //                 return true;
-    //             }
-    //         }
-    //     }
-    // })
-    // app.engine('hbs', hbs.create);
 
     app.set('view engine', 'hbs');
     app.use('/static', express.static('static'));

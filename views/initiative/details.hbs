@@ -49,7 +49,9 @@
                     {{#unless initiative.hasLiked}}
                     <a href="/data/like/{{initiative._id}}" class="btn btn-join">Like!</a>
                     {{/unless}}
-                    <span class="likes">{{initiative.usersLiked.length}} Likes</span>
+                    {{#likes initiative.usersLiked.length}}
+                    {{amount}}
+                    {{/likes}}
                     {{#if initiative.hasJoined}}
                     <!-- logged in user and has already joined the initiative  -->
                     <span class="btn btn-info">Already joined. Don't be late!</span>

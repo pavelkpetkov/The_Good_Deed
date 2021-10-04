@@ -12,6 +12,8 @@
         <div class="card-footer">
             <a href="/data/details/{{_id}}" class="btn btn-primary">Details</a>
         </div>
-            <span class="likes">{{usersLiked.length}} Likes</span>
+        {{#likes usersLiked.length}}
+        {{amount}}
+        {{/likes}}
     </div>
 </div>

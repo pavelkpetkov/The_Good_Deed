@@ -1,0 +1,23 @@
+<section class="profile col-md-6 text-center col-lg" id="profile-page">
+    <div class="profile-container">
+        <p>{{user.name}}</p>
+        <p>{{user.email}}</p>
+    </div>
+    <div class="profile-info">
+        <p>Initiatives History: <span>{{numberOfInits}}</span> counts</p>
+        {{#if numberOfInits}}
+        <div class="trips-info">
+            <!-- If there are trips created by the current logged in user display each of them -->
+            {{#each inits}}
+            <!-- This is the name of the passed context !!! -->
+            {{> init}}
+            <!-- This is the name of the partial !!! -->
+            {{/each}}
+            {{else}}
+            <!-- If there are no inits created by the current logged in user display:-->
+            <p>You have not created any initiatives yet...</p>
+        </div>
+        {{/if}}
+
+    </div>
+</section>

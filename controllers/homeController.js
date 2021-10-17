@@ -30,11 +30,12 @@ router.get('/user', async (req, res) => {
 })
 
 router.post('/search', async (req, res) => {
+    
     try {
         console.log(req.body.search);
-        const initsSearched = await req.storage.getSearched(req.body.search);
-        res.render('home/searchedTemp', { initsSearched });
-        // res.redirect('/course/details/' + req.params.id);
+        let searched = req.body.search;
+        const initsSearched = await req.storage.getSearched(searched);
+        res.render('home/searchedTemp', { initsSearched, searched });
     } catch (err) {
         console.log(err.message);
         res.redirect('/home/404');

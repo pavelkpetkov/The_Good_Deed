@@ -1,21 +1,22 @@
-<main>
-    <section>
-        <form action="search" method="POST" style="text-align: center;">
-            <input style="width: 500px;" type="search" name="search" placeholder="Search in all categories here...">
-            <button type="submit">Search</button>
-        </form>
-    </section>
-    <section id="find-section">
+<section class="container" id="find-section" style="padding-top: 30px;">
+    <div class="row text-center">
         <!-- If there are any matching matches from the search, show each of them -->
         {{#if initsSearched}}
         {{#each initsSearched}}
         {{> searched}}
         {{/each}}
-        {{else}}
-        <!-- If there are no search matches, show: -->
-        <div class="no-data-listing">
-            <p class="no-offer">No match was found in the titles of the initiatives...</p>
-        </div>
-        {{/if}}
-    </section>
-</main>
+    </div>
+    {{else}}
+    <!-- If there are no search matches, show: -->
+    <div>
+        <p style="color: white; text-align: center; padding-top: 20px">No match was found in the titles of the
+            initiatives...</p>
+    </div>
+    {{/if}}
+</section>
+<section>
+    <form action="search" method="POST" style="text-align: center;">
+        <input style="width: 500px; color: white" type="search" name="search" placeholder={{searched}}>
+        <button type="submit">Search</button>
+    </form>
+</section>

@@ -63,6 +63,12 @@ async function editInit(id, initData) {
     return initiative.save();
 }
 
+async function getSearched (searched) {
+    const pattern = new RegExp(`${searched}`, 'i');
+    let sort = { joined: -1 };
+    return Initiative.find({ title: { $regex: pattern }}).sort(sort).lean();
+}
+
 module.exports = {
     createInit,
     getAllInits,
@@ -73,5 +79,6 @@ module.exports = {
     likeInit,
     getAllEnvironmentInits,
     getAllSocietyInits,
-    getAllBeInspiredInits
+    getAllBeInspiredInits,
+    getSearched
 }

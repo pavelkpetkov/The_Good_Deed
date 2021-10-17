@@ -1,0 +1,21 @@
+<main>
+    <section>
+        <form action="search" method="POST" style="text-align: center;">
+            <input style="width: 500px;" type="search" name="search" placeholder="Search in all categories here...">
+            <button type="submit">Search</button>
+        </form>
+    </section>
+    <section id="find-section">
+        <!-- If there are any matching matches from the search, show each of them -->
+        {{#if initsSearched}}
+        {{#each initsSearched}}
+        {{> searched}}
+        {{/each}}
+        {{else}}
+        <!-- If there are no search matches, show: -->
+        <div class="no-data-listing">
+            <p class="no-offer">No match was found in the titles of the initiatives...</p>
+        </div>
+        {{/if}}
+    </section>
+</main>

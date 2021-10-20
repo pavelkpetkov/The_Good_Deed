@@ -22,11 +22,6 @@ async function getAllSocietyInits() {
     return initiatives;
 }
 
-async function getAllBeInspiredInits() {
-    const initiatives = await Initiative.find({ category: 'Be Inspired' }).lean();
-    return initiatives;
-}
-
 async function getInitById(id) {
     const initiative = await Initiative.findById(id).lean();
     return initiative;
@@ -79,6 +74,5 @@ module.exports = {
     likeInit,
     getAllEnvironmentInits,
     getAllSocietyInits,
-    getAllBeInspiredInits,
     getSearched
 }

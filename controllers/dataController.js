@@ -8,17 +8,55 @@ router.get('/', (req, res) => {
 })
 
 router.get('/environment', async (req, res) => {
-    const allEnvironment = await req.storage.getAllEnvironmentInits();
+    const allEnvironmentInits = await req.storage.getAllEnvironmentInits();
+
+    //check if they are past:
+    let currentDate = new Date();
+    const allEnvironment = [];
+
+    for (const init of allEnvironmentInits) {
+        let initDate = new Date(init.date);
+        let isItPast = initDate.getTime() < currentDate.getTime();
+        if (!isItPast) {
+            allEnvironment.push(init);
+        }
+    }
+
     res.render('initiative/allEnvironment', { allEnvironment });
 })
 
 router.get('/society', async (req, res) => {
-    const allSociety = await req.storage.getAllSocietyInits();
+    const allSocietyInits = await req.storage.getAllSocietyInits();
+
+    //check if they are past:
+    let currentDate = new Date();
+    const allSociety = [];
+
+    for (const init of allSocietyInits) {
+        let initDate = new Date(init.date);
+        let isItPast = initDate.getTime() < currentDate.getTime();
+        if (!isItPast) {
+            allSociety.push(init);
+        }
+    }
+
     res.render('initiative/allSociety', { allSociety });
 })
 
 router.get('/beinspired', async (req, res) => {
-    const allBeInspired = await req.storage.getAllBeInspiredInits();
+    const allInits = await req.storage.getAllInits();
+
+    let currentDate = new Date();
+    const allBeInspired = [];
+
+    for (const init of allInits) {
+        let initDate = new Date(init.date);
+        let isItPast = initDate.getTime() < currentDate.getTime();
+        if (isItPast) {
+            allBeInspired.push(init);
+        }
+    }
+
     res.render('initiative/allBeInspired', { allBeInspired });
 })
 

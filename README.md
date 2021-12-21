@@ -1,5 +1,5 @@
 # The_Good_Deed
-My very first app. Used ExpressJS, Handlebars, MongoDB & Mongoose.  
+My very first backend app. Used ExpressJS, Handlebars, MongoDB & Mongoose.  
 
 --under construction--
 

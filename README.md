@@ -4,9 +4,9 @@
 
 <br/>
 
- - This is my very first backend application.
- - Used Express, Handlebars, MongoDB & Mongoose. 
- - This application is still under construction - and there are many new features in the pipeline for it.
+ - This is my very first application.
+ - In this backend application - Handlebars, Express, MongoDB & Mongoose are used. 
+ - This app is still under construction - and there are many new features in the pipeline for it.
  
 ## Functionality
 - Register, login in application, logout, view pages as guest.

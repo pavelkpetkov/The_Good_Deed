@@ -7,6 +7,7 @@
  - This is my very first application.
  - In this backend application - Handlebars, Express, MongoDB & Mongoose are used. 
  - This app is still under construction - and there are many new features in the pipeline for it.
+ - Run 'npm install' for the dependencies and 'node index.js' to run the application.
  
 ## Functionality
 - Register, login in application, logout, view pages as guest.

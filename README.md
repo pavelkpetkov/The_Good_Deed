@@ -1,8 +1,13 @@
-# The_Good_Deed
-My very first backend app. Used ExpressJS, Handlebars, MongoDB & Mongoose.  
+## The Good Deed
 
---under construction--
+![Preview](./static/img/App_thumbnail.jpg)
 
+<br/>
+
+ - This is my very first backend application. 
+ - Used Express, Handlebars, MongoDB & Mongoose. 
+ - This application is still under construction - and there are many new features in the pipeline for it.
+ 
 ## Functionality
 - Register, login in application, logout, view pages as guest.
 - Create initiatives in different categories.
